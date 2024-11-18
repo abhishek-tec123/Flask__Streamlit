@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: flask-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: STREAMLIT_APP_PATH
+        value: "path_to_streamlit_app.py"
+  - type: web
+    name: streamlit-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "streamlit run path_to_streamlit_app.py --server.port=8501"
+    envVars:
+      - key: STREAMLIT_APP_PATH
+        value: "path_to_streamlit_app.py"
